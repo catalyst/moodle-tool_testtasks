@@ -27,7 +27,16 @@ defined('MOODLE_INTERNAL') || die();
 
 $tasks = array(
     array(
-        'classname' => 'tool_testtasks\task\basic_task',
+        'classname' => 'tool_testtasks\task\one_second_task',
+        'blocking'  => 0,
+        'minute'    => '*',
+        'hour '     => '*',
+        'day'       => '*',
+        'dayofweek' => '*',
+        'month'     => '*'
+    ),
+    array(
+        'classname' => 'tool_testtasks\task\ten_second_task',
         'blocking'  => 0,
         'minute'    => '*',
         'hour '     => '*',

@@ -28,7 +28,7 @@ namespace tool_testtasks\task;
 
 defined('MOODLE_INTERNAL') || die();
 
-class basic_task extends \core\task\scheduled_task {
+class ten_second_task extends \core\task\scheduled_task {
 
     /**
      * Get task name
@@ -41,12 +41,13 @@ class basic_task extends \core\task\scheduled_task {
      * Execute task
      */
     public function execute() {
-        $totalloops = 20;
-
-        for ($i = 1; $i <= $totalloops; $i++) {
-            mtrace("basic task running: $i/$totalloops");
-            sleep(3);
+        mtrace("Starting ten second task");
+        $seconds = 10;
+        for ($i = 1; $i <= $seconds; $i++) {
+            mtrace("basic task running: $i/$seconds");
+            sleep(1);
         }
+        mtrace("Ending ten second task");
     }
 }
 

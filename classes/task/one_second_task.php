@@ -15,19 +15,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information.
+ * Basic Task
  *
- * @package   tool_sssfs
+ * @package   tool_testtasks
  * @author    Kenneth Hendricks <kennethhendricks@catalyst-au.net>
  * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_testtasks\task;
+
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017020603;      // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release   = 2017020600;      // Same as version.
-$plugin->requires  = 2014051217;
-$plugin->component = "tool_testtasks";
-$plugin->maturity  = MATURITY_STABLE;
+class one_second_task extends \core\task\scheduled_task {
+
+    /**
+     * Get task name
+     */
+    public function get_name() {
+        return get_string('basic_task', 'tool_testtasks');
+    }
+
+    /**
+     * Execute task
+     */
+    public function execute() {
+        mtrace("Starting one second task");
+        sleep(1);
+        mtrace("Ending one second task");
+    }
+}
+
 
