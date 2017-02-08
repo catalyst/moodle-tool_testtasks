@@ -14,37 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Basic Task
- *
- * @package   tool_testtasks
- * @author    Kenneth Hendricks <kennethhendricks@catalyst-au.net>
- * @copyright Catalyst IT
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+define('CLI_SCRIPT', true);
 
-namespace tool_testtasks\task;
+require(__DIR__.'/../../../../config.php');
+require_once($CFG->libdir.'/clilib.php');
+
+use tool_testtasks\task\one_second_adhoc_task;
 
 
-defined('MOODLE_INTERNAL') || die();
+$task = new one_second_adhoc_task();
 
-class one_second_task extends \core\task\scheduled_task {
-
-    /**
-     * Get task name
-     */
-    public function get_name() {
-        return get_string('one_second_task', 'tool_testtasks');
-    }
-
-    /**
-     * Execute task
-     */
-    public function execute() {
-        mtrace("Starting one second task");
-        sleep(1);
-        mtrace("Ending one second task");
-    }
+for ($i = 0; $i < 10; $i++) {
+    \core\task\manager::queue_adhoc_task($task);
 }
 
 
