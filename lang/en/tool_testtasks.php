@@ -26,6 +26,6 @@
 
 $string['pluginname'] = 'Test Tasks';
 $string['one_second_task'] = 'One second task';
-$string['ten_second_task'] = 'Ten second task';
+$string['ten_second_adhoc_task'] = 'Ten second adhoc task';
 $string['one_second_adhoc_task'] = 'One second adhoc task';
 
