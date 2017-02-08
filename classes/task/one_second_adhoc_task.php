@@ -28,22 +28,22 @@ namespace tool_testtasks\task;
 
 defined('MOODLE_INTERNAL') || die();
 
-class one_second_task extends \core\task\scheduled_task {
+class one_second_adhoc_task extends \core\task\adhoc_task {
 
     /**
      * Get task name
      */
     public function get_name() {
-        return get_string('one_second_task', 'tool_testtasks');
+        return get_string('one_second_adhoc_task', 'tool_testtasks');
     }
 
     /**
      * Execute task
      */
     public function execute() {
-        mtrace("Starting one second task");
+        mtrace("Starting one second adhoc task");
         sleep(1);
-        mtrace("Ending one second task");
+        mtrace("Ending one second adhoc task");
     }
 }
 

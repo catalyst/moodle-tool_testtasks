@@ -34,7 +34,7 @@ class ten_second_task extends \core\task\scheduled_task {
      * Get task name
      */
     public function get_name() {
-        return get_string('basic_task', 'tool_testtasks');
+        return get_string('ten_second_task', 'tool_testtasks');
     }
 
     /**
