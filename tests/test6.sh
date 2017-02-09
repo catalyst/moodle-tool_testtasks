@@ -34,6 +34,6 @@ echo 'waiting for 10 second task'
 echo "10 second ad hoc task has started"
 
 echo "Now disable cron and wait"
-php admin/cli/cron.php --disable-wait  # 2>&1 > $OUTPUT &
+php admin/cli/cron.php --disable-wait --verbose  # 2>&1 > $OUTPUT &
 # php admin/cli/cron.php --disable-wait --verbose # 2>&1 > $OUTPUT &
 
