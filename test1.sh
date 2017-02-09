@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOG=/tmp/test.log
+LOG=/tmp/testcron.log
 rm -f $LOG # remove old log file.
 
 # Step 1: first we make sure cron is enabled.
