@@ -12,13 +12,13 @@ php admin/cli/cron.php --enable
 php admin/tool/testtasks/cli/clear_adhoc_task_queue.php
 
 # Step 4: Run cron in the background and pipe output to log.
-php admin/tool/testtasks/cli/queue_ten_second_adhoc_task.php
+php admin/tool/testtasks/cli/queue_adhoc_tasks.php --numberoftasks=1 --taskduration=10
 
 # Step 5: Run cron in the background and pipe output to log.
 php admin/cli/cron.php 2>&1 > $LOG &
 
 # Step 6: Wait for 10 second adhoc task to start.
-( tail -f $LOG & ) | grep -q "Starting ten second adhoc task"
+( tail -f $LOG & ) | grep -q "Starting adhoc task with duration: 10"
 
 #step 7: write output of is running to a file in the background.
 php admin/cli/cron.php --is-running --verbose 2>&1 > $OUTPUT &

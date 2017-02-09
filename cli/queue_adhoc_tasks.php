@@ -19,11 +19,29 @@ define('CLI_SCRIPT', true);
 require(__DIR__.'/../../../../config.php');
 require_once($CFG->libdir.'/clilib.php');
 
-use tool_testtasks\task\ten_second_adhoc_task;
+use tool_testtasks\task\timed_adhoc_task;
 
-$task = new ten_second_adhoc_task();
+list($options, $unrecognized) = cli_get_params(array(
+    'numberoftasks' => false,
+    'taskduration' => false));
 
-\core\task\manager::queue_adhoc_task($task);
 
+$numberoftasks = $options['numberoftasks'];
+$taskduration = $options['taskduration'];
+
+if (!$numberoftasks) {
+    $numberoftasks = 1;
+}
+
+if (!$taskduration) {
+    $taskduration = 1;
+}
+
+$task = new timed_adhoc_task();
+$task->set_custom_data(array('duration' => $taskduration));
+
+for ($i = 1; $i <= $numberoftasks; $i++) {
+    \core\task\manager::queue_adhoc_task($task);
+}
 
 

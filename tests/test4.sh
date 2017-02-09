@@ -9,7 +9,7 @@ rm -f $OUTPUT # remove old output file.
 php admin/cli/cron.php --enable
 
 # Step 2: queue ten tasks to ensure runtime
-php admin/tool/testtasks/cli/queue_ten_one_second_adhoc_tasks.php
+php admin/tool/testtasks/cli/queue_adhoc_tasks.php --numberoftasks=10 --taskduration=1
 
 # Step 3: Run cron in the background and pipe output to log.
 php admin/cli/cron.php 2>&1 > $LOG &

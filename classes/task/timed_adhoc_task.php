@@ -28,23 +28,30 @@ namespace tool_testtasks\task;
 
 defined('MOODLE_INTERNAL') || die();
 
-class one_second_adhoc_task extends \core\task\adhoc_task {
+class timed_adhoc_task extends \core\task\adhoc_task {
 
     /**
      * Get task name
      */
     public function get_name() {
-        return get_string('one_second_adhoc_task', 'tool_testtasks');
+        return get_string('timed_adhoc_task', 'tool_testtasks');
     }
 
     /**
      * Execute task
      */
     public function execute() {
-        mtrace("Starting one second adhoc task");
-        sleep(1);
-        mtrace("Ending one second adhoc task");
-    }
-}
+        $data = self::get_custom_data();
+        $duration = $data->duration;
 
+        mtrace ("Starting adhoc task with duration: $duration");
+
+        for ($i = 1; $i <= $duration; $i++) {
+            sleep(1);
+            mtrace("adhoc task running: $i/$duration seconds");
+        }
+        mtrace("Ending adhoc task with duration: $duration");
+    }
+
+}
 
