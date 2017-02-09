@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017020606;      // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2017020607;      // The current plugin version (Date: YYYYMMDDXX).
 $plugin->release   = 2017020600;      // Same as version.
 $plugin->requires  = 2014051217;
 $plugin->component = "tool_testtasks";

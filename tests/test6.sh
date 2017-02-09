@@ -3,9 +3,9 @@
 LOGONE=/tmp/testcron_1.log
 LOGTWO=/tmp/testcron_2.log
 OUTPUT=/tmp/testoutput.txt
-rm -f $LOGONE # remove old log file.
-rm -f $LOGTWO # remove old log file.
-rm -f $OUTPUT # remove old output file.
+truncate -s 0 $LOGONE # remove old log file.
+truncate -s 0 $LOGTWO # remove old log file.
+truncate -s 0 $OUTPUT # remove old output file.
 
 # Step 1: Enable cron
 php admin/cli/cron.php --enable
@@ -25,11 +25,15 @@ php admin/cli/cron.php 2>&1 > $LOGTWO &
 
 # Step 5: Wait for 30 second adhoc task to start.
 echo 'waiting for 30 second task'
-( tail -f $LOGONE & ) | grep -q "Starting adhoc task with duration: 30"
+( tail -f -n 1000 $LOGONE $LOGTWO & ) | grep -q "Starting adhoc task with duration: 30"
+echo "30 second ad hoc task has started"
 
 echo 'waiting for 10 second task'
 # Step 6: Wait for 10 second adhoc task to start.
-( tail -f $LOGTWO & ) | grep -q "Starting adhoc task with duration: 10"
+( tail -f -n 1000 $LOGONE $LOGTWO & ) | grep -q "Starting adhoc task with duration: 10"
+echo "10 second ad hoc task has started"
 
-php admin/cli/cron.php --disable-wait --verbose 2>&1 > $OUTPUT &
+echo "Now disable cron and wait"
+php admin/cli/cron.php --disable-wait  # 2>&1 > $OUTPUT &
+# php admin/cli/cron.php --disable-wait --verbose # 2>&1 > $OUTPUT &
 
