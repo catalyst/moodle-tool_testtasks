@@ -6,6 +6,8 @@ rm -f $LOG # remove old log file.
 # Step 1: Enable cron
 php admin/cli/cron.php --enable
 
+php admin/tool/testtasks/cli/clear_adhoc_task_queue.php
+
 # Step 2: Add 10 adhoc tasks.
 php admin/tool/testtasks/cli/queue_adhoc_tasks.php --numberoftasks=10 --taskduration=1
 
