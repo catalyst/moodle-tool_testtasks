@@ -37,10 +37,13 @@ if (!$taskduration) {
     $taskduration = 1;
 }
 
-$task = new timed_adhoc_task();
-$task->set_custom_data(array('duration' => $taskduration));
 
 for ($i = 1; $i <= $numberoftasks; $i++) {
+    $task = new timed_adhoc_task();
+    $task->set_custom_data(array(
+        'label' => "$i of $numberoftasks",
+        'duration' => $taskduration,
+    ));
     \core\task\manager::queue_adhoc_task($task);
 }
 

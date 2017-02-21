@@ -13,18 +13,13 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-//
 
-  /**
-   * Strings for component 'tool_testtasks', language 'en'.
-   *
-   * @package   tool_testtasks
-   * @author    Kenneth Hendricks <kennethhendricks@catalyst-au.net>
-   * @copyright Catalyst IT
-   * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-   */
+define('CLI_SCRIPT', true);
 
-$string['pluginname'] = 'Test Tasks';
-$string['timed_adhoc_task'] = 'Timed adhoc task';
-$string['one_second_task'] = 'One second task';
+require(__DIR__.'/../../../../config.php');
+require_once($CFG->libdir.'/clilib.php');
+
+global $DB;
+
+$DB->execute("UPDATE {task_scheduled} SET disabled = '1'");
 

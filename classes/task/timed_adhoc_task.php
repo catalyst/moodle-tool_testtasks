@@ -42,15 +42,16 @@ class timed_adhoc_task extends \core\task\adhoc_task {
      */
     public function execute() {
         $data = self::get_custom_data();
+        $label = $data->label;
         $duration = $data->duration;
 
-        mtrace ("Starting adhoc task with duration: $duration");
+        mtrace ("Starting adhoc task '$label' wth duration: $duration");
 
         for ($i = 1; $i <= $duration; $i++) {
             sleep(1);
             mtrace("adhoc task running: $i/$duration seconds");
         }
-        mtrace("Ending adhoc task with duration: $duration");
+        mtrace("Ending adhoc task '$label' with duration: $duration");
     }
 
 }
