@@ -15,7 +15,7 @@ php admin/tool/testtasks/cli/queue_adhoc_tasks.php --numberoftasks=10 --taskdura
 php admin/cli/cron.php 2>&1 > $LOG &
 
 # Step 4: Wait for adhoc task to start.
-( tail -f $LOG & ) | grep -q "Starting adhoc task with duration: 1"
+( tail -f $LOG & ) | grep -q "Starting adhoc task"
 
 # Step 5: disable cron
 php admin/cli/cron.php --disable

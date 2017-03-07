@@ -25,12 +25,12 @@ php admin/cli/cron.php 2>&1 > $LOGTWO &
 
 # Step 5: Wait for 30 second adhoc task to start.
 echo 'waiting for 30 second task'
-( tail -f -n 1000 $LOGONE $LOGTWO & ) | grep -q "Starting adhoc task with duration: 30"
+( tail -f -n 1000 $LOGONE $LOGTWO & ) | grep -q "Starting adhoc task '1 of 1' wth duration: 30"
 echo "30 second ad hoc task has started"
 
 echo 'waiting for 10 second task'
 # Step 6: Wait for 10 second adhoc task to start.
-( tail -f -n 1000 $LOGONE $LOGTWO & ) | grep -q "Starting adhoc task with duration: 10"
+( tail -f -n 1000 $LOGONE $LOGTWO & ) | grep -q "Starting adhoc task '1 of 1' wth duration: 10"
 echo "10 second ad hoc task has started"
 
 echo "Now disable cron and wait"

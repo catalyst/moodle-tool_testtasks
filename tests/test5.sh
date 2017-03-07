@@ -18,7 +18,7 @@ php admin/tool/testtasks/cli/queue_adhoc_tasks.php --numberoftasks=1 --taskdurat
 php admin/cli/cron.php 2>&1 > $LOG &
 
 # Step 6: Wait for 10 second adhoc task to start.
-( tail -f $LOG & ) | grep -q "Starting adhoc task with duration: 10"
+( tail -f $LOG & ) | grep -q "Starting adhoc task"
 
 #step 7: write output of is running to a file in the background.
 php admin/cli/cron.php --is-running --verbose 2>&1 > $OUTPUT &
