@@ -4,5 +4,3 @@ A plugin to assist with testing [MDL-57852](https://tracker.moodle.org/browse/MD
 
 
 
-
-
