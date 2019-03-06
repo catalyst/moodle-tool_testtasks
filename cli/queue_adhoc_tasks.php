@@ -21,9 +21,15 @@ require_once($CFG->libdir.'/clilib.php');
 
 use tool_testtasks\task\timed_adhoc_task;
 
-list($options, $unrecognized) = cli_get_params(array(
-    'numberoftasks' => false,
-    'taskduration' => false));
+list($options, $unrecognized) = cli_get_params(
+    [
+        'numberoftasks' => false,
+        'taskduration' => false,
+    ], [
+        'n' => 'numberoftasks',
+        'd' => 'taskduration',
+    ]
+);
 
 
 $numberoftasks = $options['numberoftasks'];
