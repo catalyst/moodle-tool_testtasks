@@ -50,6 +50,7 @@ for ($i = 1; $i <= $numberoftasks; $i++) {
         'label' => "$i of $numberoftasks",
         'duration' => $taskduration,
     ));
+    $task->set_component('tool__testtasks');
     \core\task\manager::queue_adhoc_task($task);
 }
 
