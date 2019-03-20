@@ -44,6 +44,7 @@ class timed_adhoc_task extends \core\task\adhoc_task {
         $data = self::get_custom_data();
         $label = $data->label;
         $duration = (int)$data->duration;
+        $success = (int)$data->success;
 
         mtrace ("Starting adhoc task '$label' wth duration: $duration");
 
@@ -51,6 +52,12 @@ class timed_adhoc_task extends \core\task\adhoc_task {
             sleep(1);
             mtrace("adhoc task running: $i/$duration seconds");
         }
+        $error = rand(0, 100);
+        if ($error > $success) {
+            mtrace("Ending adhoc task '$label' with duration: $duration with exception");
+            throw new \Exception("Exploding!");
+        }
+
         mtrace("Ending adhoc task '$label' with duration: $duration");
     }
 

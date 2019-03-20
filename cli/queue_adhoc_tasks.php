@@ -25,15 +25,18 @@ list($options, $unrecognized) = cli_get_params(
     [
         'numberoftasks' => false,
         'taskduration' => false,
+        'successrate' => 100,
     ], [
         'n' => 'numberoftasks',
         'd' => 'taskduration',
+        's' => 'successrate',
     ]
 );
 
 
 $numberoftasks = $options['numberoftasks'];
 $taskduration = $options['taskduration'];
+$successrate = $options['successrate'];
 
 if (!$numberoftasks) {
     $numberoftasks = 1;
@@ -43,12 +46,17 @@ if (!$taskduration) {
     $taskduration = 1;
 }
 
+if (!$successrate) {
+    $successrate = 100;
+}
+
 
 for ($i = 1; $i <= $numberoftasks; $i++) {
     $task = new timed_adhoc_task();
     $task->set_custom_data(array(
         'label' => "$i of $numberoftasks",
         'duration' => $taskduration,
+        'success' => $successrate,
     ));
     $task->set_component('tool_testtasks');
     \core\task\manager::queue_adhoc_task($task);
