@@ -20,12 +20,14 @@ require(__DIR__.'/../../../../config.php');
 require_once($CFG->libdir.'/clilib.php');
 
 use tool_testtasks\task\timed_adhoc_task;
+use tool_testtasks\task\another_timed_adhoc_task;
 
 list($options, $unrecognized) = cli_get_params(
     [
         'numberoftasks' => false,
         'taskduration' => false,
         'successrate' => 100,
+        'class' => 'tool_testtasks\task\timed_adhoc_task',
     ], [
         'n' => 'numberoftasks',
         'd' => 'taskduration',
@@ -50,9 +52,10 @@ if (!$successrate) {
     $successrate = 100;
 }
 
+$taskclass = $options['class'];
 
 for ($i = 1; $i <= $numberoftasks; $i++) {
-    $task = new timed_adhoc_task();
+    $task = new $taskclass();
     $task->set_custom_data(array(
         'label' => "$i of $numberoftasks",
         'duration' => $taskduration,
