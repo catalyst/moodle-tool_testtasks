@@ -15,34 +15,39 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * tool_testtasks tasks
+ * A slow Task
  *
  * @package   tool_testtasks
- * @author    Kenneth Hendricks <kennethhendricks@catalyst-au.net>
+ * @author    Brendan Heywood <brendan@catalyst-au.net>
  * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_testtasks\task;
+
+
 defined('MOODLE_INTERNAL') || die();
 
-$tasks = array(
-    array(
-        'classname' => 'tool_testtasks\task\one_second_task',
-        'blocking'  => 0,
-        'minute'    => '*',
-        'hour '     => '*',
-        'day'       => '*',
-        'dayofweek' => '*',
-        'month'     => '*'
-    ),
-    array(
-        'classname' => 'tool_testtasks\task\slow_task',
-        'blocking'  => 0,
-        'minute'    => '0',
-        'hour '     => '*',
-        'day'       => '*',
-        'dayofweek' => '*',
-        'month'     => '*'
-    ),
-);
+class slow_task extends \core\task\scheduled_task {
+
+    /**
+     * Get task name
+     */
+    public function get_name() {
+        return get_string('slow_task', 'tool_testtasks');
+    }
+
+    /**
+     * Execute task
+     */
+    public function execute() {
+        mtrace("Starting slow task");
+        for($c=0; $c<20; $c++) {
+            mtrace("slow task $c/20");
+            sleep(1);
+        }
+        mtrace("Ending slow task");
+    }
+}
+
 

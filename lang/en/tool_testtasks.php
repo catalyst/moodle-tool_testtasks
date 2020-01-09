@@ -27,4 +27,5 @@
 $string['pluginname'] = 'Test Tasks';
 $string['timed_adhoc_task'] = 'Timed adhoc task';
 $string['one_second_task'] = 'One second task';
+$string['slow_task'] = 'Slow task';
 
