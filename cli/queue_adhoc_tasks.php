@@ -54,7 +54,7 @@ if (!$successrate) {
 
 $taskclass = $options['class'];
 
-for ($i = 1; $i <= $numberoftasks; $i++) {
+for ($i = 1; $i <= intval($numberoftasks); $i++) {
     $task = new $taskclass();
     $task->set_custom_data(array(
         'label' => "$i of $numberoftasks",
@@ -64,5 +64,3 @@ for ($i = 1; $i <= $numberoftasks; $i++) {
     $task->set_component('tool_testtasks');
     \core\task\manager::queue_adhoc_task($task);
 }
-
-
