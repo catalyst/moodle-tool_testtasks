@@ -25,6 +25,7 @@
    */
 
 $string['pluginname'] = 'Test Tasks';
+$string['privacy:metadata'] = 'The tool_testtasks plugin does not store any personal data.';
 $string['timed_adhoc_task'] = 'Timed adhoc task';
 $string['one_second_task'] = 'One second task';
 $string['slow_task'] = 'Slow task';
