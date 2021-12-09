@@ -43,6 +43,5 @@ shuffle($tasks);
 
 foreach ($tasks as $task) {
     $task = new $task();
-    echo "queue " . get_class($task) . "\n";
     \core\task\manager::queue_adhoc_task($task);
 }
