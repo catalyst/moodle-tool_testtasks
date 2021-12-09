@@ -15,19 +15,33 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information.
+ * One hundred second task.
  *
- * @package   tool_sssfs
- * @author    Kenneth Hendricks <kennethhendricks@catalyst-au.net>
- * @copyright Catalyst IT
+ * @package   tool_testtasks
+ * @copyright Catalyst IT Australia Pty Ltd
+ * @author    Cameron Ball <cameron@cameron1729.xyz>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_testtasks\task;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021120900;      // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release   = 2020010900;      // Same as version.
-$plugin->requires  = 2014051217;
-$plugin->component = "tool_testtasks";
-$plugin->maturity  = MATURITY_STABLE;
+class one_hundred_second_task extends \core\task\adhoc_task {
 
+    /**
+     * Get task name
+     */
+    public function get_name() {
+        return get_string('one_hundred_second_task', 'tool_testtasks');
+    }
+
+    /**
+     * Execute task
+     */
+    public function execute() {
+        mtrace("Starting one hundred second task");
+        sleep(100);
+        mtrace("Ending one hundred second task");
+    }
+}
