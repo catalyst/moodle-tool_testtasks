@@ -33,10 +33,12 @@ list($options, $unrecognized) = cli_get_params(
     ]
 );
 
+$classes = explode(',', $options['classes']);
+
 $tasks = array_merge(
     ...array_map(
         fn($c) => array_fill(0, $options['numberoftasks'], trim($c)),
-        explode(',', $options['classes'])
+        $classes
     )
 );
 shuffle($tasks);
@@ -56,3 +58,6 @@ $records = array_map(
 );
 
 $DB->insert_records('task_adhoc', $records);
+
+print "Queued up " . count($classes) . " x " . $options['numberoftasks'] . " = "  . count($records) . " tasks\n";
+
