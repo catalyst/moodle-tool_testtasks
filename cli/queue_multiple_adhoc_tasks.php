@@ -41,7 +41,18 @@ $tasks = array_merge(
 );
 shuffle($tasks);
 
-foreach ($tasks as $task) {
-    $task = new $task();
-    \core\task\manager::queue_adhoc_task($task);
-}
+$records = array_map(
+    function($t) {
+        $task = new $t();
+        $record = \core\task\manager::record_from_adhoc_task($task);
+
+        if (!$task->get_next_run_time) {
+            $record->nextruntime = time() -1;
+        }
+
+        return $record;
+    },
+    $tasks
+);
+
+$DB->insert_records('task_adhoc', $records);
