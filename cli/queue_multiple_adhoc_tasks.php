@@ -46,7 +46,7 @@ $records = array_map(
         $task = new $t();
         $record = \core\task\manager::record_from_adhoc_task($task);
 
-        if (!isset($task->get_next_run_time)) {
+        if (!$task->get_next_run_time()) {
             $record->nextruntime = time() -1;
         }
 
