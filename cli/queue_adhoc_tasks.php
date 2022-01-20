@@ -22,19 +22,35 @@ require_once($CFG->libdir.'/clilib.php');
 use tool_testtasks\task\timed_adhoc_task;
 use tool_testtasks\task\another_timed_adhoc_task;
 
+$usage = "Wrangle up a variety of test adhoc and scheduled tasks for tracker testing
+
+Options:
+    -h --help            Print this help.
+    -n --numberoftasks=n Number of adhoc tasks to queue
+    -d --duration=n      Duration of the test tasks in seconds
+    -s --successrate=n   Success rate the test tasks from 0-100
+    -c --class           Class of task to queue, defaults to timed_adhoc_task
+
+";
 list($options, $unrecognized) = cli_get_params(
     [
         'numberoftasks' => false,
         'taskduration' => false,
         'successrate' => 100,
+        'help' => false,
         'class' => 'tool_testtasks\task\timed_adhoc_task',
     ], [
         'n' => 'numberoftasks',
         'd' => 'taskduration',
         's' => 'successrate',
+        'h' => 'help',
     ]
 );
 
+if ($unrecognized || $options['help']) {
+    cli_writeln($usage);
+    exit(2);
+}
 
 $numberoftasks = $options['numberoftasks'];
 $taskduration = $options['taskduration'];
