@@ -34,4 +34,4 @@ $string['ten_second_task'] = 'Ten second task';
 $string['one_hundred_second_task'] = 'One hundred second task';
 $string['one_thousand_second_task'] = 'One thousand second task';
 $string['slow_task'] = 'Slow task';
-
+$string['failing_task'] = 'A failing scheduled task';
