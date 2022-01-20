@@ -44,5 +44,14 @@ $tasks = array(
         'dayofweek' => '*',
         'month'     => '*'
     ),
+    array(
+        'classname' => 'tool_testtasks\task\timed_scheduled_task',
+        'blocking'  => 0,
+        'minute'    => '0',
+        'hour '     => '*',
+        'day'       => '*',
+        'dayofweek' => '*',
+        'month'     => '*'
+    ),
 );
 
