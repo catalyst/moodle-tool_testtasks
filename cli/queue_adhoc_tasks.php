@@ -64,7 +64,7 @@ if (!$taskduration) {
     $taskduration = 1;
 }
 
-if (!$successrate) {
+if ($successrate === false) {
     $successrate = 100;
 }
 
@@ -72,11 +72,13 @@ $taskclass = $options['class'];
 
 for ($i = 1; $i <= intval($numberoftasks); $i++) {
     $task = new $taskclass();
-    $task->set_custom_data(array(
+    $data =[
         'label' => "$i of $numberoftasks",
         'duration' => $taskduration,
         'success' => $successrate,
-    ));
+    ];
+    mtrace("Queue task with this data: " . json_encode($data));
+    $task->set_custom_data($data);
     $task->set_component('tool_testtasks');
     \core\task\manager::queue_adhoc_task($task);
 }
