@@ -39,7 +39,7 @@ for($c = 0; $c < 50; $c++) {
             'delay' => $delay,
         ],
     ]);
+    sleep($delay); // The delay must be between when the event is made and when it is triggered.
     $event->trigger();
     echo "logged event {$num} delay $delay<br>";
-    sleep($delay);
 }
