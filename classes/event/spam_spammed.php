@@ -57,7 +57,6 @@ class spam_spammed extends \core\event\base {
      * @return string
      */
     public function get_description() {
-e($this->other);
         return "Spam number " . $this->other['spamnumber'] . " delay " . $this->other['delay'];
     }
 
