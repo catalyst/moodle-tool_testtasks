@@ -25,7 +25,6 @@
 
 namespace tool_testtasks\task;
 
-
 defined('MOODLE_INTERNAL') || die();
 
 class recursive_task extends \core\task\adhoc_task {
@@ -34,7 +33,7 @@ class recursive_task extends \core\task\adhoc_task {
     const LOOP_DELAY_DEFAULT = 100000;
     protected $started = 0;
     protected $duration = 0;
-    
+
     /**
      * Get task name
      */
@@ -46,23 +45,23 @@ class recursive_task extends \core\task\adhoc_task {
      * Execute task
      */
     public function execute() {
-        /**
-         * The default condition is to run a recursive task with
-         * 0.1 second delay for 10 seconds.
-         */ 
+        // The default condition is a recursive task with 0.1 second delay running for 10 seconds.
+
         $data = self::get_custom_data();
         $label = $data->label;
         $duration = (int)$data->duration;
         $success = (int)$data->success;
+        // Convert from user (milliseconds) to internal (microseconds).
         $loopdelay = (int)$data->loopdelay * 1000;
         if ($loopdelay < self::LOOP_DELAY_MIN) {
             $loopdelay = self::LOOP_DELAY_DEFAULT;
         }
         if (! $duration) {
+            // Total task running time in seconds.
             $duration = 10;
         }
-        $self->duration = $duration;
-  
+        $this->duration = $duration;
+
         mtrace ("Starting adhoc task '$label' wth loop duration: $duration");
 
         $this->started = time();
@@ -78,11 +77,11 @@ class recursive_task extends \core\task\adhoc_task {
     }
 
     public function recurse($delay) {
-      if (time() > ($this->started + $this->duration)) {
-          return;
-      }
-      time_nanosleep(0, $delay);
-      $this->recurse($delay);
+        if (time() > ($this->started + $this->duration)) {
+            return true;
+        }
+        time_nanosleep(0, $delay);
+        return $this->recurse($delay);
     }
 }
 
