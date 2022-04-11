@@ -56,7 +56,7 @@ class recursive_task extends \core\task\adhoc_task {
         if ($loopdelay < self::LOOP_DELAY_MIN) {
             $loopdelay = self::LOOP_DELAY_DEFAULT;
         }
-        if (! $duration) {
+        if ($duration <= 0) {
             // Total task running time in seconds.
             $duration = 10;
         }
