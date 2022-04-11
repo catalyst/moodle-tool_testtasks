@@ -29,6 +29,7 @@ Options:
     -n --numberoftasks=n Number of adhoc tasks to queue
     -d --duration=n      Duration of the test tasks in seconds
     -s --successrate=n   Success rate the test tasks from 0-100
+    -l --loopdelay=n     Loop delay in ms for repetitive/recursive tasks, default 100, min 10
     -c --class           Class of task to queue, defaults to timed_adhoc_task
 
 ";
@@ -37,12 +38,14 @@ list($options, $unrecognized) = cli_get_params(
         'numberoftasks' => false,
         'taskduration' => false,
         'successrate' => 100,
+        'loopdelay' => 100,
         'help' => false,
         'class' => 'tool_testtasks\task\timed_adhoc_task',
     ], [
         'n' => 'numberoftasks',
         'd' => 'taskduration',
         's' => 'successrate',
+        'l' => 'loopdelay',
         'h' => 'help',
     ]
 );
@@ -55,6 +58,7 @@ if ($unrecognized || $options['help']) {
 $numberoftasks = $options['numberoftasks'];
 $taskduration = $options['taskduration'];
 $successrate = $options['successrate'];
+$loopdelay = $options['loopdelay'];
 
 if (!$numberoftasks) {
     $numberoftasks = 1;
@@ -68,14 +72,19 @@ if ($successrate === false) {
     $successrate = 100;
 }
 
+if ($loopdelay < 10) {
+    $loopdelay = 100;
+}
+
 $taskclass = $options['class'];
 
 for ($i = 1; $i <= intval($numberoftasks); $i++) {
     $task = new $taskclass();
-    $data =[
+    $data = [
         'label' => "$i of $numberoftasks",
         'duration' => $taskduration,
         'success' => $successrate,
+        'loopdelay' => $loopdelay
     ];
     mtrace("Queue task with this data: " . json_encode($data));
     $task->set_custom_data($data);
