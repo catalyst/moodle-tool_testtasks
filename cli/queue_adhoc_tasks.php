@@ -36,14 +36,14 @@ Options:
 list($options, $unrecognized) = cli_get_params(
     [
         'numberoftasks' => false,
-        'taskduration' => false,
+        'duration' => false,
         'successrate' => 100,
         'loopdelay' => 100,
         'help' => false,
         'class' => 'tool_testtasks\task\timed_adhoc_task',
     ], [
         'n' => 'numberoftasks',
-        'd' => 'taskduration',
+        'd' => 'duration',
         's' => 'successrate',
         'l' => 'loopdelay',
         'h' => 'help',
