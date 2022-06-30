@@ -56,7 +56,7 @@ if ($unrecognized || $options['help']) {
 }
 
 $numberoftasks = $options['numberoftasks'];
-$taskduration = $options['taskduration'];
+$taskduration = $options['duration'];
 $successrate = $options['successrate'];
 $loopdelay = $options['loopdelay'];
 
