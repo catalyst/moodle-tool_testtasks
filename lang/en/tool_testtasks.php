@@ -36,3 +36,4 @@ $string['one_thousand_second_task'] = 'One thousand second task';
 $string['slow_task'] = 'Slow task';
 $string['failing_task'] = 'A failing scheduled task';
 $string['recursive_task'] = 'Recursive task';
+$string['mtrace_task'] = 'Mtrace task';
