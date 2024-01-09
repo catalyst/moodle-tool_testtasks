@@ -73,6 +73,16 @@ class mtrace_task extends \core\task\scheduled_task {
         usleep(100000);
 
         mtrace("<script>alert('this should not alert');</script>");
+
+        debugging(" debugging normal", DEBUG_NORMAL);
+        usleep(100000);
+
+        debugging(" debugging developer", DEBUG_DEVELOPER);
+        usleep(100000);
+
+        debugging(" debugging all", DEBUG_ALL);
+        usleep(100000);
+
     }
 }
 
