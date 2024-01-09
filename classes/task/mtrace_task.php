@@ -42,7 +42,7 @@ class mtrace_task extends \core\task\scheduled_task {
      */
     public function execute() {
 
-        mtrace("This task output a url http://moodle.com");
+        mtrace("1 This task output a url http://moodle.com");
         usleep(100000);
         mtrace("This task output a url http://moodle.com post stuff");
         usleep(100000);
@@ -72,15 +72,27 @@ class mtrace_task extends \core\task\scheduled_task {
         mtrace(" one line");
         usleep(100000);
 
-        mtrace("<script>alert('this should not alert');</script>");
+        mtrace("2 <script>alert('this should not alert');</script>");
 
-        debugging(" debugging normal", DEBUG_NORMAL);
+        debugging("3 debugging normal", DEBUG_NORMAL);
         usleep(100000);
 
-        debugging(" debugging developer", DEBUG_DEVELOPER);
+        debugging("4 debugging developer", DEBUG_DEVELOPER);
         usleep(100000);
 
-        debugging(" debugging all", DEBUG_ALL);
+        debugging("5 debugging all", DEBUG_ALL);
+        usleep(100000);
+
+        error_log('6 this is error_log');
+        usleep(100000);
+
+        fwrite(STDERR, "7 this is direct to STDERR\n");
+        usleep(100000);
+
+        fwrite(STDOUT, "8 this is direct to STDOUT\n");
+        usleep(100000);
+
+        print "9 this is normal print\n";
         usleep(100000);
 
     }
