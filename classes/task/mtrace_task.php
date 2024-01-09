@@ -83,18 +83,25 @@ class mtrace_task extends \core\task\scheduled_task {
         debugging("5 debugging all", DEBUG_ALL);
         usleep(100000);
 
-        error_log('6 this is error_log');
+        debugging("6 debugging minimal", DEBUG_MINIMAL);
         usleep(100000);
 
-        fwrite(STDERR, "7 this is direct to STDERR\n");
+        debugging("7 debugging none", DEBUG_NONE);
         usleep(100000);
 
-        fwrite(STDOUT, "8 this is direct to STDOUT\n");
+        error_log('8 this is error_log');
         usleep(100000);
 
-        print "9 this is normal print\n";
+        fwrite(STDERR, "9 this is direct to STDERR\n");
         usleep(100000);
 
+        fwrite(STDOUT, "10 this is direct to STDOUT\n");
+        usleep(100000);
+
+        print "11 this is normal print\n";
+        usleep(100000);
+
+            // throw new \Exception("Exploding!");
     }
 }
 
