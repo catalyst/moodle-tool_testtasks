@@ -45,6 +45,15 @@ $tasks = array(
         'month'     => '*'
     ),
     array(
+        'classname' => 'tool_testtasks\task\progress_task',
+        'blocking'  => 0,
+        'minute'    => '0',
+        'hour '     => '*',
+        'day'       => '*',
+        'dayofweek' => '*',
+        'month'     => '*'
+    ),
+    array(
         'classname' => 'tool_testtasks\task\failing_task',
         'blocking'  => 0,
         'minute'    => '0',
