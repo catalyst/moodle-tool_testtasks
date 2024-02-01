@@ -27,24 +27,18 @@ namespace tool_testtasks\task;
 
 class stored_progress_adhoc_task extends \core\task\adhoc_task {
 
+    use \core\task\stored_progress_task_trait;
+
     public function execute() : bool {
 
-        // Create progress bar with unique name.
-        // For this case, we use the task class and ID so nothing should overwrite it.
-        $progress = new \core\stored_progress_bar(
-            \core\stored_progress_bar::convert_to_idnumber(get_class($this), $this->get_id())
-        );
-
-        // Start the progress storing.
-        $progress->auto_update(false);
-        $progress->start();
+        $this->start_stored_progress();
 
         $seconds = 30;
         for ($i = 1; $i <= $seconds; $i++) {
 
             // Manually update the percentage.
             $percent = round(($i / $seconds) * 100);
-            $progress->update_full($percent, "{$percent}% completed");
+            $this->progress->update_full($percent, "{$percent}% completed");
             mtrace("{$percent}% done");
             sleep(1);
 

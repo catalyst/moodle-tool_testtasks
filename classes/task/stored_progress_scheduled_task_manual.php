@@ -27,32 +27,26 @@ namespace tool_testtasks\task;
 
 class stored_progress_scheduled_task_manual extends \core\task\scheduled_task {
 
+    use \core\task\stored_progress_task_trait;
+
     public function get_name() {
         return 'Example scheduled task';
     }
 
     public function execute() {
 
-        // Create progress bar with unique name.
-        // For this case, we use the class name so nothing else will overwrite it (or will it?).
-        $progress = new \core\stored_progress_bar(
-            \core\stored_progress_bar::convert_to_idnumber(get_class($this))
-        );
-
-        // Start the progress storing and don't auto render updates as it doesn't work in tasks.
-        $progress->auto_update(false);
-        $progress->start();
+        $this->start_stored_progress();
 
         $seconds = 30;
         for ($i = 1; $i <= $seconds; $i++) {
 
             // Manually update the percentage.
             $percent = round(($i / $seconds) * 100);
-            $progress->update_full($percent, "I am {$percent}% done");
+            $this->progress->update_full($percent, "I am {$percent}% done");
             sleep(1);
 
             if ($i > 28) {
-                $progress->error('oh no i failed!');
+                $this->progress->error('oh no i failed!');
                 return;
             }
 
