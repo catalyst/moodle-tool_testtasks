@@ -39,7 +39,6 @@ class stored_progress_adhoc_task extends \core\task\adhoc_task {
             // Manually update the percentage.
             $percent = round(($i / $seconds) * 100);
             $this->progress->update_full($percent, "{$percent}% completed");
-            mtrace("{$percent}% done");
             sleep(1);
 
         }
