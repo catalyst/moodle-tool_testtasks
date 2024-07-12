@@ -1,5 +1,5 @@
 <?php
-define('NO_OUTPUT_BUFFERING', true);
+// define('NO_OUTPUT_BUFFERING', true);
 require '../../../config.php';
 
 // Display the bar of the long running task.
@@ -13,7 +13,7 @@ echo $OUTPUT->heading('All running stored progress bars');
 $records = $DB->get_records('stored_progress');
 foreach ($records as $record) {
 
-    $bar = \core\stored_progress_bar::get_by_idnumber($record->idnumber);
+    $bar = \core\output\stored_progress_bar::get_by_idnumber($record->idnumber);
     if ($bar) {
         $bar->render();
     }

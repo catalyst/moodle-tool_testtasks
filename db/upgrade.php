@@ -26,6 +26,6 @@ function xmldb_tool_testtasks_upgrade($oldversion) {
     \core\task\manager::queue_adhoc_task($task);
 
     // This seems to be set to run all the time, not just once. So just updated to latest version.
-    upgrade_plugin_savepoint(true, 2024013100, 'tool', 'testtasks');
+    upgrade_plugin_savepoint(true, 2024013102, 'tool', 'testtasks');
 
 }
