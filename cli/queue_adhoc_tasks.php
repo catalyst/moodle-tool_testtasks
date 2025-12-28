@@ -25,28 +25,31 @@ use tool_testtasks\task\another_timed_adhoc_task;
 $usage = "Wrangle up a variety of test adhoc and scheduled tasks for tracker testing
 
 Options:
-    -h --help            Print this help.
-    -n --numberoftasks=n Number of adhoc tasks to queue
-    -d --duration=n      Duration of the test tasks in seconds
-    -s --successrate=n   Success rate the test tasks from 0-100
-    -l --loopdelay=n     Loop delay in ms for repetitive/recursive tasks, default 100, min 10
     -c --class           Class of task to queue, defaults to timed_adhoc_task
+    -d --duration=n      Duration of the test tasks in seconds
+    -h --help            Print this help.
+    -l --loopdelay=n     Loop delay in ms for repetitive/recursive tasks, default 100, min 10
+    -n --numberoftasks=n Number of adhoc tasks to queue
+    -s --successrate=n   Success rate the test tasks from 0-100
+    -f --future=n        Schedule the task n seconds into the future
 
 ";
 list($options, $unrecognized) = cli_get_params(
     [
-        'numberoftasks' => false,
-        'duration' => false,
-        'successrate' => 100,
-        'loopdelay' => 100,
-        'help' => false,
         'class' => 'tool_testtasks\task\timed_adhoc_task',
+        'duration' => false,
+        'future' => 0,
+        'help' => false,
+        'loopdelay' => 100,
+        'numberoftasks' => false,
+        'successrate' => 100,
     ], [
-        'n' => 'numberoftasks',
         'd' => 'duration',
-        's' => 'successrate',
-        'l' => 'loopdelay',
         'h' => 'help',
+        'f' => 'future',
+        'l' => 'loopdelay',
+        'n' => 'numberoftasks',
+        's' => 'successrate',
     ]
 );
 
@@ -88,6 +91,10 @@ for ($i = 1; $i <= intval($numberoftasks); $i++) {
     ];
     mtrace("Queue task with this data: " . json_encode($data));
     $task->set_custom_data($data);
+
+    $future = (int)$options['future'];
+    $task->set_next_run_time(time() + $future);
+
     $task->set_component('tool_testtasks');
     \core\task\manager::queue_adhoc_task($task);
 }
