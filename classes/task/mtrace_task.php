@@ -48,6 +48,10 @@ class mtrace_task extends \core\task\scheduled_task {
         usleep(100000);
         mtrace("http://moodle.com post stuff");
         usleep(100000);
+        mtrace("https://moodle.com/some/path post stuff");
+        usleep(100000);
+        mtrace("tool_beacon: See results at https://main.localhost/some/path");
+        usleep(100000);
         mtrace("http://moodle.com");
         usleep(100000);
 
