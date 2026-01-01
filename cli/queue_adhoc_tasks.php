@@ -27,12 +27,12 @@ $usage = "Wrangle up a variety of test adhoc and scheduled tasks for tracker tes
 Options:
     -c --class           Class of task to queue, defaults to timed_adhoc_task
     -d --duration=n      Duration of the test tasks in seconds
+    -f --future=n        Schedule the task n seconds into the future
     -h --help            Print this help.
     -l --loopdelay=n     Loop delay in ms for repetitive/recursive tasks, default 100, min 10
     -n --numberoftasks=n Number of adhoc tasks to queue
     -s --successrate=n   Success rate the test tasks from 0-100
-    -f --future=n        Schedule the task n seconds into the future
-
+    -u --user            If set assignedd the task to a random user
 ";
 list($options, $unrecognized) = cli_get_params(
     [
@@ -43,13 +43,15 @@ list($options, $unrecognized) = cli_get_params(
         'loopdelay' => 100,
         'numberoftasks' => false,
         'successrate' => 100,
+        'user' => false,
     ], [
         'd' => 'duration',
-        'h' => 'help',
         'f' => 'future',
+        'h' => 'help',
         'l' => 'loopdelay',
         'n' => 'numberoftasks',
         's' => 'successrate',
+        'u' => 'user',
     ]
 );
 
@@ -58,10 +60,11 @@ if ($unrecognized || $options['help']) {
     exit(2);
 }
 
-$numberoftasks = $options['numberoftasks'];
-$taskduration = $options['duration'];
-$successrate = $options['successrate'];
 $loopdelay = $options['loopdelay'];
+$numberoftasks = $options['numberoftasks'];
+$successrate = $options['successrate'];
+$taskduration = $options['duration'];
+$user = $options['user'];
 
 if (!$numberoftasks) {
     $numberoftasks = 1;
@@ -81,15 +84,36 @@ if ($loopdelay < 10) {
 
 $taskclass = $options['class'];
 
+// Get just as many users as we need
+if ($user) {
+    $users = $DB->get_records_sql("
+      SELECT id,
+             username
+        FROM {user}
+       WHERE deleted = 0
+         AND suspended = 0
+         AND username != 'guest'
+", [], 0, $numberoftasks);
+    $users = array_values($users);
+}
+
 for ($i = 1; $i <= intval($numberoftasks); $i++) {
     $task = new $taskclass();
+
+    $info = '';
+    if ($user) {
+        $userrec = $users[($i-1) % sizeof($users)];
+        $task->set_userid($userrec->id);
+        $info = " with user id {$userrec->id} {$userrec->username}";
+    }
+
     $data = [
         'label' => "$i of $numberoftasks",
         'duration' => $taskduration,
         'success' => $successrate,
         'loopdelay' => $loopdelay
     ];
-    mtrace("Queue task with this data: " . json_encode($data));
+    mtrace("Queue task with this data$info: " . json_encode($data));
     $task->set_custom_data($data);
 
     $future = (int)$options['future'];

@@ -44,7 +44,7 @@ class slow_task extends \core\task\scheduled_task {
         mtrace("Starting slow task");
         for($c=0; $c<20; $c++) {
             mtrace("slow task $c/20");
-            sleep(1);
+            // sleep(1);
         }
         mtrace("Ending slow task");
     }
