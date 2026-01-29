@@ -45,7 +45,7 @@ class task_with_delay extends \core\task\adhoc_task {
         mtrace("The time is " . userdate(time(), '"%I:%M:%S %p"'));
 
         sleep(1);
-        $this->set_soft_retry_delay(1);
+        $this->set_soft_retry_delay();
         $this->create_soft_retry_delay();
         mtrace("We have set a default delay");
     }

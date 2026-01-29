@@ -24,17 +24,18 @@
    * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
    */
 
+$string['failing_task'] = 'A failing scheduled task';
+$string['five_second_task'] = 'Five second task';
+$string['mtrace_task'] = 'Mtrace task';
+$string['one_hundred_second_task'] = 'One hundred second task';
+$string['one_second_task'] = 'One second task';
+$string['one_thousand_second_task'] = 'One thousand second task';
 $string['pluginname'] = 'Test Tasks';
 $string['privacy:metadata'] = 'The tool_testtasks plugin does not store any personal data.';
-$string['timed_adhoc_task'] = 'Timed adhoc task';
-$string['one_second_task'] = 'One second task';
-$string['two_second_task'] = 'Two second task';
-$string['five_second_task'] = 'Five second task';
-$string['ten_second_task'] = 'Ten second task';
-$string['one_hundred_second_task'] = 'One hundred second task';
-$string['one_thousand_second_task'] = 'One thousand second task';
 $string['progress_task'] = 'Progress bar task';
-$string['slow_task'] = 'Slow task';
-$string['failing_task'] = 'A failing scheduled task';
 $string['recursive_task'] = 'Recursive task';
-$string['mtrace_task'] = 'Mtrace task';
+$string['slow_task'] = 'Slow task';
+$string['task_with_delay'] = 'Task with delay';
+$string['ten_second_task'] = 'Ten second task';
+$string['timed_adhoc_task'] = 'Timed adhoc task';
+$string['two_second_task'] = 'Two second task';
