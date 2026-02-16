@@ -29,7 +29,7 @@ while (!$ready) {
 
     $ready = true;
 
-    for($c = 1; $c <= 5; $c++) {
+    for($c = 1; $c <= 6; $c++) {
 
         if (isset($values[$c])) {
             continue;
