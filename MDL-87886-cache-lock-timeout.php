@@ -74,6 +74,8 @@ while (!$ready) {
 
 }
 
+ksort($values);
+
 // Now we should have all values
 echo json_encode($values, JSON_PRETTY_PRINT) . "\n";
 
