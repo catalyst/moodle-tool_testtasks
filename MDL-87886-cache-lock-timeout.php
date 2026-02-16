@@ -23,12 +23,17 @@ function logg($msg) {
     error_log($msg);
 }
 
+$wait = 0;
 
 while (!$ready) {
 
     $ready = true;
 
     for($c = 1; $c <= 5; $c++) {
+
+        if (isset($values[$c])) {
+            continue;
+        }
 
         $cache = cache::make('core', 'coursemodinfo');
         $cachekey = "test$c";
@@ -49,7 +54,7 @@ while (!$ready) {
 
                     $value = "value $c";
                     logg("LOCK and SET $cachekey = '$value'");
-                    sleep(5);
+                    sleep(3);
                     $cache->set_versioned($cachekey, 1, $value);
                     $cache->get_versioned($cachekey, 1);
                     $values[$c] = $value;
@@ -61,6 +66,12 @@ while (!$ready) {
             }
         }
     }
+
+    $wait += 50;
+
+    logg("WAITING for $wait");
+    usleep($wait * 1000);
+
 }
 
 // Now we should have all values
