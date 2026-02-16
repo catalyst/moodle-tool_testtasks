@@ -8,8 +8,9 @@ $iscli = !$isweb;
 if ($iscli) {
     define('CLI_SCRIPT', true);
 }
+define('NO_OUTPUT_BUFFERING', true);
 
-require('config.php');
+require(__DIR__ . '/../../../config.php');
 
 if ($isweb) {
     header('Content-Type: text/plain; charset=UTF-8');
@@ -21,6 +22,7 @@ $ready = false;
 function logg($msg) {
     echo "$msg\n";
     error_log($msg);
+    flush();
 }
 
 $wait = 0;
@@ -67,10 +69,10 @@ while (!$ready) {
         }
     }
 
-    $wait += 50;
 
     logg("WAITING for $wait");
     usleep($wait * 1000);
+    $wait += 50;
 
 }
 
