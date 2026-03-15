@@ -119,10 +119,19 @@ for ($i = 1; $i <= intval($numberoftasks); $i++) {
         'success' => $successrate,
         'loopdelay' => $loopdelay
     ];
-    mtrace("Queue task with this data$info: " . json_encode($data));
     $task->set_custom_data($data);
 
-    $future = (int)$options['future'];
+    $future = $options['future'];
+    if ($future == 'r') {
+        $future = random_int(-60, 120);
+    } else {
+        $future = (int)$future;
+    }
+
+    $timeinfo = ($future != 0) ? " in $future seconds" : '';
+
+    mtrace("Queue task$timeinfo with this data$info: " . json_encode($data));
+
     $task->set_next_run_time(time() + $future);
 
     $task->set_component('tool_testtasks');
