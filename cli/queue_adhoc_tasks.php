@@ -45,6 +45,7 @@ list($options, $unrecognized) = cli_get_params(
         'successrate' => 100,
         'user' => false,
     ], [
+        'c' => 'class',
         'd' => 'duration',
         'f' => 'future',
         'h' => 'help',
@@ -99,6 +100,11 @@ if ($user) {
 
 for ($i = 1; $i <= intval($numberoftasks); $i++) {
     $task = new $taskclass();
+
+    if (!$task) {
+        echo "Class $task is not found!\n";
+        die;
+    }
 
     $info = '';
     if ($user) {
