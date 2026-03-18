@@ -71,7 +71,7 @@ if (!$numberoftasks) {
     $numberoftasks = 1;
 }
 
-if (!$taskduration) {
+if ($taskduration === false) {
     $taskduration = 1;
 }
 
