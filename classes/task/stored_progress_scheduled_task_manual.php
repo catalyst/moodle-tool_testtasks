@@ -26,11 +26,10 @@
 namespace tool_testtasks\task;
 
 class stored_progress_scheduled_task_manual extends \core\task\scheduled_task {
-
     use \core\task\stored_progress_task_trait;
 
     public function get_name() {
-        return 'Example scheduled task';
+        return get_string('stored_progress_scheduled_task_manual', 'tool_testtasks');
     }
 
     public function execute() {
@@ -49,11 +48,8 @@ class stored_progress_scheduled_task_manual extends \core\task\scheduled_task {
                 $this->progress->error('oh no i failed!');
                 return;
             }
-
         }
 
         return true;
-
     }
-
 }
