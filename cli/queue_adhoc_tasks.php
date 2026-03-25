@@ -27,7 +27,9 @@ $usage = "Wrangle up a variety of test adhoc and scheduled tasks for tracker tes
 Options:
     -c --class           Class of task to queue, defaults to timed_adhoc_task
     -d --duration=n      Duration of the test tasks in seconds
+    -d --duration=r      A random duration
     -f --future=n        Schedule the task n seconds into the future
+    -f --future=r        A random delay, some in the past and some in the future
     -h --help            Print this help.
     -l --loopdelay=n     Loop delay in ms for repetitive/recursive tasks, default 100, min 10
     -n --numberoftasks=n Number of adhoc tasks to queue
