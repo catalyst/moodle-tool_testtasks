@@ -113,9 +113,14 @@ for ($i = 1; $i <= intval($numberoftasks); $i++) {
         $info = " with user id {$userrec->id} {$userrec->username}";
     }
 
+    $duration = $taskduration;
+    if ($taskduration == 'r') {
+        $duration = random_int(0, 5) * random_int(1, 5);
+    }
+
     $data = [
         'label' => "$i of $numberoftasks",
-        'duration' => $taskduration,
+        'duration' => $duration,
         'success' => $successrate,
         'loopdelay' => $loopdelay
     ];
