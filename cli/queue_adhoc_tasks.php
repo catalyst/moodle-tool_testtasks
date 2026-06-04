@@ -126,6 +126,14 @@ for ($i = 1; $i <= intval($numberoftasks); $i++) {
         'success' => $successrate,
         'loopdelay' => $loopdelay
     ];
+
+    if ($taskclass === 'tool_testtasks\task\large_custom_data') {
+        $data['extradata'] = [];
+        for ($line = 1; $line <= 100; $line++) {
+            $data['extradata'][] = "line {$line}";
+        }
+    }
+
     $task->set_custom_data($data);
 
     $future = $options['future'];

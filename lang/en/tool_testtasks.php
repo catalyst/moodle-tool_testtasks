@@ -30,6 +30,7 @@ $string['mtrace_task'] = 'Mtrace task';
 $string['one_hundred_second_task'] = 'One hundred second task';
 $string['one_second_task'] = 'One second task';
 $string['one_thousand_second_task'] = 'One thousand second task';
+$string['large_custom_data'] = 'Large custom data task';
 $string['pluginname'] = 'Test Tasks';
 $string['privacy:metadata'] = 'The tool_testtasks plugin does not store any personal data.';
 $string['progress_task'] = 'Progress bar task';
