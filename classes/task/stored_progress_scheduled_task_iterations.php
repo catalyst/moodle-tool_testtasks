@@ -35,7 +35,7 @@ class stored_progress_scheduled_task_iterations extends \core\task\scheduled_tas
     public function execute() {
 
         // This simulates a specific count of iterations the task will do, e.g. x number of courses to loop through and do something.
-        $iterations = 1000;
+        $iterations = 10;
 
         $this->start_stored_progress();
 

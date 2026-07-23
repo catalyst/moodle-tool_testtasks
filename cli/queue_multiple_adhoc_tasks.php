@@ -22,11 +22,11 @@ require_once($CFG->libdir.'/clilib.php');
 list($options, $unrecognized) = cli_get_params(
     [
         'numberoftasks' => 1,
-        'classes' => 'tool_testtasks\task\two_second_task,' .
-                     'tool_testtasks\task\five_second_task,' .
-                     'tool_testtasks\task\ten_second_task,' .
-                     'tool_testtasks\task\one_hundred_second_task,' .
-                     'tool_testtasks\task\one_thousand_second_task'
+        'classes' => 'tool_testtasks\task\two_second_task,'
+                   . 'tool_testtasks\task\five_second_task,'
+                   . 'tool_testtasks\task\ten_second_task,'
+                   . 'tool_testtasks\task\one_hundred_second_task'
+                   // . 'tool_testtasks\task\one_thousand_second_task'
     ], [
         'n' => 'numberoftasks',
         'c' => 'classes'

@@ -35,6 +35,9 @@ Options:
     -n --numberoftasks=n Number of adhoc tasks to queue
     -s --successrate=n   Success rate the test tasks from 0-100
     -u --user            If set assignedd the task to a random user
+
+php queue_adhoc_tasks.php -c='\tool_testtasks\task\five_second_task'
+
 ";
 list($options, $unrecognized) = cli_get_params(
     [
