@@ -130,7 +130,7 @@ $from = $now - (int)round($days * 24 * 60 * 60);
 $to = $now - (int)round($days / 2 * 24 * 60 * 60);
 $other = serialize([]);
 
-cli_writeln("Generating $count '$eventname' events for user $userid" .
+cli_writeln("Generating " . number_format($count) . " '$eventname' events for user $userid" .
     ($courseid ? " in course $courseid" : '') .
     ", timestamped randomly between " . date('Y-m-d H:i:s', $from) . " and " . date('Y-m-d H:i:s', $to) . "...");
 
@@ -143,9 +143,12 @@ for ($i = 0; $i < $count; $i++) {
 }
 sort($timestamps);
 
-$batchsize = 5000;
+$batchsize = 500;
 $batch = [];
 $inserted = 0;
+
+$progressbar = new \core\output\progress_bar();
+$progressbar->create();
 
 foreach ($timestamps as $timecreated) {
     $batch[] = (object)[
@@ -175,7 +178,7 @@ foreach ($timestamps as $timecreated) {
         $DB->insert_records('logstore_standard_log', $batch);
         $inserted += count($batch);
         $batch = [];
-        cli_writeln("  ...$inserted / $count inserted");
+        $progressbar->update($inserted, $count, number_format($inserted) . ' / ' . number_format($count) . ' inserted');
     }
 }
 
@@ -184,4 +187,5 @@ if (!empty($batch)) {
     $inserted += count($batch);
 }
 
-cli_writeln("Done. Inserted $inserted events.");
+$progressbar->update_full(100, number_format($inserted) . ' / ' . number_format($count) . ' inserted');
+cli_writeln('Done. Inserted ' . number_format($inserted) . ' events.');
