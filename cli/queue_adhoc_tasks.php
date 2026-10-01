@@ -34,7 +34,7 @@ Options:
     -l --loopdelay=n     Loop delay in ms for repetitive/recursive tasks, default 100, min 10
     -n --numberoftasks=n Number of adhoc tasks to queue
     -s --successrate=n   Success rate the test tasks from 0-100
-    -u --user            If set assignedd the task to a random user
+    -u --user=id         Assign the task to user with the given id, or a random user if no id given
 
 php queue_adhoc_tasks.php -c='\tool_testtasks\task\five_second_task'
 
@@ -92,15 +92,20 @@ $taskclass = $options['class'];
 
 // Get just as many users as we need
 if ($user) {
-    $users = $DB->get_records_sql("
-      SELECT id,
-             username
-        FROM {user}
-       WHERE deleted = 0
-         AND suspended = 0
-         AND username != 'guest'
-", [], 0, $numberoftasks);
-    $users = array_values($users);
+    if (is_numeric($user)) {
+        $userrec = $DB->get_record('user', ['id' => (int)$user, 'deleted' => 0], 'id, username', MUST_EXIST);
+        $users = [$userrec];
+    } else {
+        $users = $DB->get_records_sql("
+          SELECT id,
+                 username
+            FROM {user}
+           WHERE deleted = 0
+             AND suspended = 0
+             AND username != 'guest'
+    ", [], 0, $numberoftasks);
+        $users = array_values($users);
+    }
 }
 
 for ($i = 1; $i <= intval($numberoftasks); $i++) {
