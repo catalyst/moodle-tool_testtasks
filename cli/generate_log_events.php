@@ -150,8 +150,15 @@ $inserted = 0;
 $progressbar = new \core\output\progress_bar();
 $progressbar->create();
 
+// Wrap all the inserts in a single transaction: without this, each insert_records() chunk
+// commits separately, which on InnoDB (and other transactional engines) means an fsync per
+// chunk rather than one at the end - by far the biggest cost for large --count values.
+$transaction = $DB->start_delegated_transaction();
+
 foreach ($timestamps as $timecreated) {
-    $batch[] = (object)[
+    // Plain arrays rather than stdClass: insert_records() casts objects to arrays internally
+    // anyway, so building arrays directly skips that per-row conversion.
+    $batch[] = [
         'eventname' => $eventname,
         'component' => 'core',
         'action' => 'viewed',
@@ -186,6 +193,8 @@ if (!empty($batch)) {
     $DB->insert_records('logstore_standard_log', $batch);
     $inserted += count($batch);
 }
+
+$transaction->allow_commit();
 
 $progressbar->update_full(100, number_format($inserted) . ' / ' . number_format($count) . ' inserted');
 cli_writeln('Done. Inserted ' . number_format($inserted) . ' events.');
