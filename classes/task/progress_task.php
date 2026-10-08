@@ -42,7 +42,9 @@ class progress_task extends \core\task\scheduled_task {
      */
     public function execute() {
         global $OUTPUT;
-        // $OUTPUT->paragraph('dud');
+
+        // HACK to fix cli output see https://moodle.atlassian.net/browse/MDL-80770
+        $OUTPUT->doctype();
 
         $progressbar = new \progress_bar();
         $progressbar->create();

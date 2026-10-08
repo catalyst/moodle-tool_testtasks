@@ -36,7 +36,7 @@ class stored_progress_scheduled_task_manual extends \core\task\scheduled_task {
 
         $this->start_stored_progress();
 
-        $seconds = 30;
+        $seconds = 10;
         for ($i = 1; $i <= $seconds; $i++) {
 
             // Manually update the percentage.
